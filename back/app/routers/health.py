@@ -1,8 +1,8 @@
 from fastapi import APIRouter 
 #APIRouter is used to group routes (endpoints) in a modular way.
 
-from app.services.db import get_db_connection #function that connects to PostgreSQL
-from app.services.cache import redis_client # pre-configured Redis client
+from app.services.db import get_db_connection,release_db_connection
+from app.services.cache import redis_client
 
 router=APIRouter() #router instance , creates a "mini FastAPI app"
 
@@ -11,7 +11,7 @@ def health():
     #testing PostgreSQL
     try:
         connection=get_db_connection() #tries to connect
-        connection.close()
+        release_db_connection(connection)
         db_status="OK"
     except:
         db_status="FAILED"

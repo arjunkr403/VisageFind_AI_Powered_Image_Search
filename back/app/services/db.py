@@ -1,15 +1,33 @@
-import psycopg2  # psycopg2 is a PostgreSQL database adapter for Python.It allows you to connect and run SQL queries against PostgreSQL.
-from psycopg2.extras import RealDictCursor  # return results as dictionaries.
-from app.config import settings  # values from .env
+# psycopg2 is the PostgreSQL adapter for Python
+import psycopg2
+
+# SimpleConnectionPool creates a reusable pool of DB connections
+from psycopg2.pool import SimpleConnectionPool
+
+# RealDictCursor returns rows as dictionaries
+from psycopg2.extras import RealDictCursor
+
+# Loads DB settings from .env
+from app.config import settings
 
 
-# function to call anywhere to get a new DB connection
+# maintain a limited number of open DB connections
+pool = SimpleConnectionPool(
+    minconn=1,
+    maxconn=10,
+    host=settings.POSTGRES_HOST,
+    database=settings.POSTGRES_DB,
+    user=settings.POSTGRES_USER,
+    password=settings.POSTGRES_PASSWORD,
+    cursor_factory=RealDictCursor
+)
+
+# Borrow a connection from the pool.
+# FastAPI will call this before executing an endpoint.
 def get_db_connection():
-    connection = psycopg2.connect(
-        host=settings.POSTGRES_HOST,
-        database=settings.POSTGRES_DB,
-        user=settings.POSTGRES_USER,
-        password=settings.POSTGRES_PASSWORD,
-        cursor_factory=RealDictCursor,  # Makes query results return dictionaries instead of tuples.
-    )
-    return connection
+    return pool.getconn()
+
+# Return the connection back to the pool.
+# FastAPI calls this after the endpoint finishes.
+def release_db_connection(conn):
+    pool.putconn(conn)
