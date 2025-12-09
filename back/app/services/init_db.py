@@ -18,6 +18,18 @@ def create_tables():  # to initialize db schema
                     );
                     """
                 )
+                
+                cur.execute(
+                    """
+                    CREATE TABLE IF NOT EXISTS embeddings (
+                        id SERIAL PRIMARY KEY,
+                        image_id INTEGER REFERENCES images(id) ON DELETE CASCADE,
+                        vector FLOAT8[]
+                    );
+                    """
+                    # If the image is deleted, its embedding gets deleted automatically (cascade delete).
+                    # vector FLOAT8[]=> PostgreSQL array type (float8 = double precision = Python float).
+                )
 
     finally:
         release_db_connection(conn)  # return connection to pool

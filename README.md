@@ -78,3 +78,29 @@
 
 
 ---
+
+
+
+## 📅 Embedding Generation & FAISS Preparation — 09 Dec 2025
+
+### ✔️ Completed
+
+- Created ML module structure: clip_model.py, embeddings.py, faiss_index.py
+- Loaded CLIP model (clip-ViT-B-32) for image embedding generation
+- Implemented embedding generator function and integrated it with file storage
+- Added embeddings table to PostgreSQL for storing vector representations
+- Developed /embed/{image_id} API endpoint:
+  - Validates image presence
+  - Generates CLIP embeddings
+  - Inserts embedding vectors into database
+- Successfully tested embedding creation in Postman
+- Prepared FAISS index creation function for Day 5 search features
+
+
+### 📘 What I Learned
+
+- How to use CLIP for generating semantic image embeddings
+- Storing embeddings as lists of floats in PostgreSQL
+- Structuring ML modules inside a production backend
+- How FAISS indexes work (IndexFlatL2, dimension detection)
+- Designing an end-to-end embedding pipeline for image search
