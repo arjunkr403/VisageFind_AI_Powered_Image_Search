@@ -80,7 +80,6 @@
 ---
 
 
-
 ## 📅 Embedding Generation & FAISS Preparation — 09 Dec 2025
 
 ### ✔️ Completed
@@ -104,3 +103,35 @@
 - Structuring ML modules inside a production backend
 - How FAISS indexes work (IndexFlatL2, dimension detection)
 - Designing an end-to-end embedding pipeline for image search
+
+
+---
+
+
+## 📅 Search Pipeline (FAISS + Similarity Search API) — 09 Dec 2025
+
+### ✔️ Completed
+
+- Set up full FAISS search workflow
+- Loaded all embeddings from PostgreSQL into memory
+- Built FAISS index for similarity search
+- Added real-time FAISS updates during image upload
+- Implemented /search API endpoint
+  - Accepts a query image
+  - Generates CLIP embedding
+  - Performs similarity search using FAISS
+  - Returns most similar stored images
+- Successfully tested search functionality in Postman
+- Verified end-to-end search pipeline is working
+
+### 📘 What I Learned
+
+- How FAISS indexes accelerate similarity search
+- How to organize ML search pipeline inside FastAPI
+- Importance of global index loading during app startup
+- How to generate embeddings for query images
+- Mapping FAISS results back to database image records
+- Building a complete semantic image search workflow
+
+
+---
