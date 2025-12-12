@@ -1,4 +1,4 @@
-## 🗓️ Initial Setup — *24 Nov 2025*
+## 🗓️ Initial Setup — 24 Nov 2025
 
 ### ✔️ Completed
 
@@ -22,7 +22,7 @@
 
 ---
 
-## 🗓️ Backend Architecture + DB/Redis Setup — *02 Dec 2025*
+## 🗓️ Backend Architecture + DB/Redis Setup — 02 Dec 2025
 
 ### ✔️ Completed
 
@@ -132,6 +132,44 @@
 - How to generate embeddings for query images
 - Mapping FAISS results back to database image records
 - Building a complete semantic image search workflow
+
+
+---
+
+
+## 📅 C++ Image Preprocessing Optimization — 12 Dec 2025
+
+### ✔️ Completed
+
+- Set up a C++ preprocessing module using:
+  - OpenCV for fast, optimized image operations
+  - pybind11 for creating Python bindings
+- Implemented high-performance preprocessing steps:
+  - Image resizing to 224×224 (CLIP standard)
+  - Denoising (fastNlMeansDenoisingColored)
+  - Sharpening (Gaussian + weighted enhancement)
+  - BGR → RGB conversion for CLIP compatibility
+- Created cpp/preprocess.cpp implementing the preprocessing pipeline
+- Compiled the module into a Python-importable .so file using CMake
+- Successfully built the shared library using:
+  - cmake ..
+  - make -j4
+- Integrated C++ preprocessing into Python backend:
+  - Added module into app/ml/
+  - Updated gen_img_embedding() to use fast preprocessing
+  - Converted NumPy → PIL → CLIP embedding
+- Fixed CLIP model usage (using model.encode() which works for both images and text in sentence-transformers)
+
+### 📘 What I Learned
+
+- How Python loads C++ modules compiled via pybind11
+- How OpenCV C++ provides much faster preprocessing than Python
+- Correct CLIP usage in sentence-transformers:
+  - model.encode() supports images + text
+  - encode_image() does NOT exist in this variant
+- How preprocessing stabilizes CLIP embeddings and improves search quality
+- How to structure a mixed C++ + Python production pipeline
+- How to debug import paths for compiled .so modules
 
 
 ---
