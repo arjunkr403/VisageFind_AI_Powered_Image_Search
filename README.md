@@ -173,3 +173,27 @@
 
 
 ---
+
+## 📅 Full-Stack Integration & Frontend Features — 27 Dec 2025
+
+### ✔️ Completed
+
+- Integrated React frontend with FastAPI backend for upload and search.
+- Enhanced Dashboard page with live data, including a "Total Searches" counter.
+- Implemented a full-stack Search History feature:
+  - Backend: Added `search_history` table and a `/search/history` API endpoint to the search router.
+  - Frontend: Built out the History page UI, fetching and displaying live search logs.
+- Created a robust API service layer (`api.js`) with Axios to handle all backend communication.
+- Refactored the search API for more efficient database connection handling.
+- Performed end-to-end debugging to resolve a `500 Internal Server Error` caused by a database schema mismatch.
+
+### 📘 What I Learned
+
+- The complete lifecycle of a full-stack feature, from database to UI.
+- Extending existing FastAPI routers with new endpoints to maintain a modular API.
+- Managing complex state in React (loading status, tabs, API data).
+- Building dynamic UIs that render live data instead of static mockups.
+- How Axios handles `Content-Type` headers differently for `FormData` vs. JSON.
+- End-to-end debugging, tracing an error from a frontend `AxiosError` to a backend database issue.
+
+---
